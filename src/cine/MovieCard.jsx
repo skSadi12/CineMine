@@ -1,6 +1,7 @@
 import React from "react";
 import { getImageUrl } from "../utils/Cine-utility";
 import priceTag from "../assets/tag.svg"
+import Rating from "./Rating";
 
 function MovieCard({ movie }) {
   return (
@@ -20,14 +21,7 @@ function MovieCard({ movie }) {
         <p className="mb-2 text-sm text-[#575A6E]">{movie.genre}</p>
 
         <div className="mb-5 flex items-center space-x-1">
-          {[...Array(5)].map((_, index) => (
-            <img
-              key={index}
-              src="./assets/star.svg"
-              alt="star"
-              className="h-4 w-4"
-            />
-          ))}
+          <Rating value={movie.rating}/>
         </div>
 
         <button className="flex w-full items-center justify-center gap-2 rounded-lg bg-primary px-5 py-2 text-sm font-semibold text-[#171923]">
