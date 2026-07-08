@@ -42,7 +42,7 @@ function MovieCard({ movie }) {
     >
       <a href="#" onClick={()=> handleMovieSelection(movie)}>
       <img
-        className="w-full object-cover"
+        className="w-full h-100 object-cover"
         src={getImageUrl(movie.cover)}
         alt={movie.title}
       />

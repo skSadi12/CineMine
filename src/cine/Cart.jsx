@@ -7,6 +7,13 @@ import { getImageUrl } from '../utils/Cine-utility'
 
 function Cart({onCancel}) {
     const{cartData , setCartData} = useContext(movieContext)
+    function handelDelete (e,id){
+        e.preventDefault()
+        const filteredItem = cartData.filter((item)=>{
+            return item.id !== id 
+        })
+        setCartData([...filteredItem])
+    }
   return (
     <>
       <div
@@ -22,8 +29,10 @@ function Cart({onCancel}) {
           <div
             className="space-y-8 lg:space-y-12 max-h-[450px] overflow-auto mb-10 lg:mb-14"
           >
-            {cartData.map((item)=>{
-             return   <div className="grid grid-cols-[1fr_auto] gap-4 rounded-xl border-black border-2 p-2">
+            {cartData.length === 0 ? 
+            <p className=' text-2xl font-bold text-amber-200'>Your cart is empty</p> :
+            cartData.map((item)=>{
+             return   <div key={item.id} className="grid grid-cols-[1fr_auto] gap-4 rounded-xl border-black border-2 p-2">
               <div className="flex items-center gap-4">
                 <img
                   className="rounded overflow-hidden h-24 "
@@ -40,14 +49,15 @@ function Cart({onCancel}) {
               </div>
               <div className="flex justify-between gap-4 items-center">
                 <button
-                  className="bg-[#D42967] rounded-md p-2 md:px-4 inline-flex items-center space-x-2 text-white"
+                 onClick={(e)=>handelDelete(e , item.id)} className="bg-[#D42967] rounded-md p-2 md:px-4 inline-flex items-center space-x-2 text-white"
                 >
                   <img className="w-5 h-5" src={remove} alt="" />
                   <span className="max-md:hidden">Remove</span>
                 </button>
               </div>
             </div>
-            })}
+            })
+            }
             
           </div>
           <div className="flex items-center justify-end gap-2">
