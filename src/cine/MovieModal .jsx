@@ -1,6 +1,6 @@
 import React from 'react'
 import { getImageUrl } from "../utils/Cine-utility";
-function MovieModal ({movie,onClose}) {
+function MovieModal ({movie,onClose ,onAddingToCart}) {
   return (
     <>
       <div
@@ -30,7 +30,7 @@ function MovieModal ({movie,onClose}) {
             <div className="grid lg:grid-cols-2 gap-2">
               <a
                 className="bg-primary rounded-lg py-2 px-5 flex items-center justify-center gap-2 text-[#171923] font-semibold text-sm"
-                href="#"
+                href="#" onClick={(e)=>onAddingToCart(e,movie)}
               >
                 <img src="./assets/tag.svg" alt="" />
                 <span>$1{movie.price} | Add to Cart</span>

@@ -1,6 +1,12 @@
-import React from 'react'
+import React, { useContext } from 'react'
+import { movieContext } from '../context'
+import remove from "../assets/delete.svg"
+import chackOut from "../assets/icons/checkout.svg"
+import { getImageUrl } from '../utils/Cine-utility'
+
 
 function Cart({onCancel}) {
+    const{cartData , setCartData} = useContext(movieContext)
   return (
     <>
       <div
@@ -16,61 +22,40 @@ function Cart({onCancel}) {
           <div
             className="space-y-8 lg:space-y-12 max-h-[450px] overflow-auto mb-10 lg:mb-14"
           >
-            <div className="grid grid-cols-[1fr_auto] gap-4">
+            {cartData.map((item)=>{
+             return   <div className="grid grid-cols-[1fr_auto] gap-4 rounded-xl border-black border-2 p-2">
               <div className="flex items-center gap-4">
                 <img
-                  className="rounded overflow-hidden"
-                  src="/assets/cart-item.png"
-                  alt=""
+                  className="rounded overflow-hidden h-24 "
+                  src={getImageUrl(item.cover)}
+                  alt={item.cover}
                 />
                 <div>
-                  <h3 className="text-base md:text-xl font-bold">Iron Man</h3>
+                  <h3 className="text-base md:text-xl font-bold">{item.title}</h3>
                   <p className="max-md:text-xs text-[#575A6E]">
-                    Action/Adventure/Sci-fi
+                    {item.genre}
                   </p>
-                  <span className="max-md:text-xs">$100</span>
+                  <span className="max-md:text-xs">${item.price}</span>
                 </div>
               </div>
               <div className="flex justify-between gap-4 items-center">
                 <button
                   className="bg-[#D42967] rounded-md p-2 md:px-4 inline-flex items-center space-x-2 text-white"
                 >
-                  <img className="w-5 h-5" src="./assets/delete.svg" alt="" />
+                  <img className="w-5 h-5" src={remove} alt="" />
                   <span className="max-md:hidden">Remove</span>
                 </button>
               </div>
             </div>
-            <div className="grid grid-cols-[1fr_auto] gap-4">
-              <div className="flex items-center gap-4">
-                <img
-                  className="rounded overflow-hidden"
-                  src="/assets/cart-item.png"
-                  alt=""
-                />
-                <div>
-                  <h3 className="text-base md:text-xl font-bold">Iron Man</h3>
-                  <p className="max-md:text-xs text-[#575A6E]">
-                    Action/Adventure/Sci-fi
-                  </p>
-                  <span className="max-md:text-xs">$100</span>
-                </div>
-              </div>
-              <div className="flex justify-between gap-4 items-center">
-                <button
-                  className="bg-[#D42967] rounded-md p-2 md:px-4 inline-flex items-center space-x-2 text-white"
-                >
-                  <img className="w-5 h-5" src="./assets/delete.svg" alt="" />
-                  <span className="max-md:hidden">Remove</span>
-                </button>
-              </div>
-            </div>
+            })}
+            
           </div>
           <div className="flex items-center justify-end gap-2">
             <a
               className="rounded-md p-2 md:px-4 inline-flex items-center space-x-2 bg-primary text-[#171923] text-sm"
               href="#"
             >
-            <img src="./assets/icons/checkout.svg" width="24" height="24" alt=""/>
+            <img src={chackOut} width="24" height="24" alt=""/>
               <span>Checkout</span>
             </a>
             <a
